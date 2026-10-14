@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>موقع الاختبار الذكي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">IQ</div>
+        <div>
+          <div class="brand-title">موقع الاختبار الذكي</div>
+          <div class="brand-sub">اختبر معلوماتك بطريقة حديثة</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="btn ghost" id="globalHomeBtn" hidden>?????? ????????</button>
+        <div class="user-chip" id="userChip" hidden></div>
+      </div>
+    </header>
+
+    <section id="screen-survey" class="screen" hidden>
+      <div class="card hero">
+        <h1>استبيان الدخول</h1>
+        <p class="muted">للمتابعة يجب تعبئة النموذج مرة واحدة فقط.</p>
+        <div class="survey-wrap">
+          <iframe
+            id="surveyFrame"
+            title="استبيان الدخول"
+            src="about:blank"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="survey-actions">
+          <label class="survey-check">
+            <input type="checkbox" id="surveyDoneCheck" />
+            <span>أقر أني قمت بتعبئة النموذج</span>
+          </label>
+          <button class="btn primary" id="surveyDoneBtn" disabled>دخول الموقع</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-login" class="screen">
+      <div class="card hero">
+        <h1>ابدأ الاختبار الآن</h1>
+        <p class="muted">ادخل بياناتك للمتابعة واستعراض المواد المتاحة للاختبار.</p>
+        <form id="loginForm" class="form">
+          <label>
+            <span>الاسم الكامل</span>
+            <input type="text" id="nameInput" placeholder="مثال: أحمد محمد" required />
+          </label>
+          <label>
+            <span>الرقم الأكاديمي</span>
+            <input type="text" id="idInput" placeholder="مثال: 20231234" required />
+          </label>
+          <button type="submit" class="btn primary">دخول</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="screen-home" class="screen" hidden>
+      <div class="card">
+        <div class="welcome">
+          <div>
+            <h2 id="welcomeText">أهلا بشمهندس</h2>
+            <p class="muted" id="welcomeSub">اختر المادة التي تريد الاختبار فيها.</p>
+          </div>
+          <button class="btn ghost" id="logoutBtn">تغيير البيانات</button>
+        </div>
+        <div class="subject">
+          <div class="subject-head">
+            <h3 id="subjectTitle">منهجية البحث</h3>
+            <div id="subjectActions"></div>
+            <span class="pill">مواد متاحة</span>
+          </div>
+          <input class="section-search" id="sectionSearch" type="search" hidden />
+          <div id="sectionsGrid" class="grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-quiz" class="screen" hidden>
+      <div class="card quiz">
+        <div class="quiz-head">
+          <div>
+            <div class="quiz-title" id="quizTitle">اختبار</div>
+            <div class="muted" id="quizMeta">السؤال</div>
+          </div>
+          <div class="quiz-actions">
+            <div class="question-status" id="questionStatus"></div>
+            <div class="timer" id="timer">00:00</div>
+            <button class="btn danger" id="finishBtn">إنهاء الاختبار</button>
+          </div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="question">
+          <div class="q-text" id="questionText"></div>
+          <div class="options" id="optionsList"></div>
+        </div>
+        <div class="nav">
+          <button class="btn ghost mark-btn" id="markBtn" type="button"></button>
+          <button class="btn ghost" id="prevBtn">السابق</button>
+          <button class="btn primary" id="nextBtn">التالي</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-result" class="screen" hidden>
+      <div class="card result">
+        <h2>تقرير الاختبار</h2>
+        <div class="summary" id="summary"></div>
+        <div class="summary-actions">
+          <button class="btn ghost danger" id="nextWrongBtn">الانتقال للخطأ التالي</button>
+        </div>
+        <div class="review-filters" id="reviewFilters"></div>
+        <div class="review" id="review"></div>
+        <div class="result-actions">
+          <button class="btn primary" id="retryBtn">إعادة الاختبار</button>
+          <button class="btn ghost" id="exportBtn">تصدير النتيجة</button>
+          <button class="btn ghost" id="homeBtn">الرجوع للرئيسية</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <footer class="footer">
+    <span>Engineer SM</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
+  <script src="data/hci_questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
